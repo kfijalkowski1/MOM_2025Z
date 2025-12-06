@@ -15,10 +15,10 @@ maximize TotalFlow:
         sum{(i,j) in ARCS: j in PLANTS} x[i,j];
 
 # Capacity constraints
-s.t. Cap{(i,j) in ARCS}: x[i,j] <= u[i,j];
+subject to Cap{(i,j) in ARCS}: x[i,j] <= u[i,j];
 
 # Flow conservation at intermediate nodes (non-source, non-plants)
-s.t. Balance{j in NODES: j <> s and not (j in PLANTS)}:
+subject to Balance{j in NODES: j <> s and not (j in PLANTS)}:
         sum{(i,j2) in ARCS: j2 = j} x[i,j2]
     = sum{(j2,k) in ARCS: j2 = j} x[j2,k];
 

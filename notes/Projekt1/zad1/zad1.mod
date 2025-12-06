@@ -1,5 +1,5 @@
 reset;
-
+# Parametry i Dane
 set NODES;
 set INTERMEDIATE_NODES;
 
@@ -18,6 +18,7 @@ data zad1.dat;
 
 var flow{f in NODES, t in NODES} >= 0;
 
+# Ograniczenia
 subject to capacity_constraint{f in NODES, t in NODES}:
 	flow[f, t] <= CAPACITY[f, t];
 
@@ -42,9 +43,11 @@ subject to mine_capacity_B:
 subject to mine_capacity_C:
 	sum{j in NODES} flow["C", j] <= W_C;
 
+# Funkcja celu
 minimize total_cost:
 	sum{f in NODES, t in NODES} COST[f, t] * flow[f, t];
 
+# Rozwiązanie
 option solver cplex;
 solve;
 
