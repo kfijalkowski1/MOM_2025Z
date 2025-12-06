@@ -1,0 +1,23 @@
+# Dane do zadania 2.3 (czasy w miesiącach)
+
+set T := A B C D E F;
+set P := 1 2 3 4 5 6;
+
+# Czasy t[i,j]; wartości podane dla dozwolonych kompetencji, pozostałe również wpisane,
+# ale kompetencje wymuszą x[i,j]=0 (allowed[i,j]=0).
+param t : 1   2   3   4   5   6 :=
+   A     15   1e6 11  1e6 13  11
+   B     1e6 12  14  16  1e6 1e6
+   C     14  16  1e6 11  17  1e6
+   D      9  1e6 12  1e6 13  1e6
+   E     1e6 10  1e6 12  1e6 16
+   F     12  1e6 1e6 1e6 15  18 ;
+
+# Kompetencje: 1 dla dozwolonych krawędzi, 0 w przeciwnym razie
+param allowed : 1 2 3 4 5 6 :=
+   A           1 0 1 0 1 1
+   B           0 1 1 1 0 0
+   C           1 1 0 1 1 0
+   D           1 0 1 0 1 0
+   E           0 1 0 1 0 1
+   F           1 0 0 0 1 1 ;

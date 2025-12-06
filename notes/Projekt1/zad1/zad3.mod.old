@@ -1,0 +1,39 @@
+reset;
+
+set P;
+param b{P} > 0;           # baseline plan per point
+param w_max >= 0;         # weight for maximum relative deviation
+param w_sum >= 0;         # weight for sum of relative deviations
+
+data zad3.dat;
+
+var x{P} integer >= 0;    # planned sales per point
+var r{P} >= 0;            # relative deviation per point |x-b|/b
+var d{P} integer >= 0;    # absolute deviation in units: |x-b|
+Dmax integer >= 0;        # maximum absolute deviation (units)
+# Absolute relative deviations (linearized)
+subject to abs_pos{i in P}: b[i]*r[i] >=  x[i] - b[i];
+subject to abs_neg{i in P}: b[i]*r[i] >=  b[i] - x[i];
+
+# Maximum of relative deviations (linearized)
+subject to max_rel{i in P}: R >= r[i];
+
+# Business constraints
+subject to total_sum:
+    sum{i in P} x[i] = sum{i in P} b[i];
+
+subject to inc_1_3_8:
+    x[1] + x[3] + x[8] >= 1.12 * (b[1] + b[3] + b[8]);
+
+subject to dec_3_5:
+    x[3] + x[5] <= 0.93 * (b[3] + b[5]);
+
+subject to rel_3_vs_7:
+    x[3] >= 0.8 * x[7];
+
+minimize obj:
+    w_max * R + w_sum * sum{i in P} r[i];
+     w_max * Dmax + w_sum * sum{i in P} d[i};
+
+solve;
+

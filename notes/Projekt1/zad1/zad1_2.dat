@@ -1,0 +1,30 @@
+set NODES := s A B C D E F G H;
+
+set ARCS := 
+    (s,A) (s,B) (s,C)
+    (A,D) (A,E)
+    (B,D) (B,E)
+    (C,D) (C,E)
+    (D,E) (D,F) (D,G) (D,H)
+    (E,F) (E,G) (E,H);
+
+param s := s;
+set PLANTS := F G H;
+
+param u :=
+    s A  10
+    s B  13
+    s C  22
+    A D   8
+    A E  10
+    B D  10
+    B E  13
+    C D  10
+    C E   8
+    D E  20
+    D F  16
+    D G   6
+    D H  10
+    E F   7
+    E G   4
+    E H   2;
