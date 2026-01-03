@@ -529,45 +529,17 @@ $$
 ### Najlepsze rozwiązanie
 **Najlepsze C: 14**
 
-Wynik w formie tabeli:
-| Projekt/Zespół | A | B | C | D | E | F |
-|----------------|---|---|---|---|---|---|
-| 1              |   |   |   |   |   | X |
-| 2              |   |   |   |   | X |   |
-| 3              |   | X |   |   |   |   |
-| 4              |   |   | X |   |   |   |
-| 5              |   |   |   | X |   |   |
-| 6              | X |   |   |   |   |   |
+| Projekt/Zespół | A   | B   | C   | D   | E   | F   |
+| -------------- | --- | --- | --- | --- | --- | --- |
+| 1              |     |     |     |     |     | X   |
+| 2              |     |     |     |     | X   |     |
+| 3              |     | X   |     |     |     |     |
+| 4              |     |     | X   |     |     |     |
+| 5              |     |     |     | X   |     |     |
+| 6              | X   |     |     |     |     |     |
+
 
 # Zadanie 3
-treść:
-```
-Pewna firma FMCG planuje sprzedaż jednego produktu. Produkt jest dostarczany do 8 punktów
-sprzedaży. Na podstawie danych historycznych (lub prognozowanych) utworzony tzw. plan bazowy
-dostaw opisujący ilości produktu, które były (powinny być) dostarczane do każdego punktu. Jest on
-następujący:
-
-punkt 1 2 3 4 5 6 7 8
-ilość 240 385 138 224 144 460 198 200
-
-Jednak ze względu na akcje marketingowe oraz różnego rodzaju umowy/ustalenia z handlowcami tego
-produktu wprowadzono różnego rodzaju modyfikacje ww. planu bazowego w formie zagregowanych
-ograniczeń eksperckich:
-1. Suma towaru dostarczonego do punktów 1, 3, 8 ma być przynajmniej o 12% większa
-niż planie bazowym.
-2. Suma towaru dostarczonego do punktów 3, 5 ma być przynajmniej o 7% mniejsza niż
-w planie bazowym.
-3. Ilość towaru dostarczonego do punktu 3 ma stanowić przynajmniej 80% towaru
-dostarczonego do punktu 7.
-
-Zakładając, że sumaryczna wielkość sprzedaży produktu we wszystkich punktach nie może zostać
-zmieniona, należy zaplanować wielkość sprzedaży w poszczególnych punktach minimalizującą
-względne odchylenie (upewnij się, że dobrze rozumiesz „względne odchylenie”) od planu bazowego
-(a dokładnie - wartość bezwzględną względnego odchylenia). Ponieważ jest 8 względnych odchyleń
-(kryteriów), należy sformułować własną funkcję celu, która jest sumą ważoną dwóch składników: 1)
-maksymalnego względnego odchylenia pośród 8 odchyleń, 2) sumy wszystkich względnych odchyleń.
-Należy zamodelować powyższy problem w postaci zadania programowania liniowego. 
-```
 
 ## Model programowania liniowego
 
@@ -671,3 +643,31 @@ $$
 \min\; w_{\max}\, R \;+\; w_{\Sigma}\, \sum_{i\in P} r_i,
 $$
 
+### Wyniki
+
+Dla wag `w_max = 1.0` i `w_sum = 1.0` uzyskano plan sprzedaży z maksymalnym względnym odchyleniem około `0.1600`. 
+Wyniki w tabeli:
+
+| Punkt | Sprzedaż | Odchylenie |
+| ----- | -------- | ---------- |
+| 1     | 278      | +38        |
+| 2     | 385      | 0          |
+| 3     | 138      | 0          |
+| 4     | 224      | 0          |
+| 5     | 124      | -20        |
+| 6     | 436      | -24        |
+| 7     | 172      | -26        |
+| 8     | 232      | +32        |
+
+Dla wag `w_max = 10.0` i `w_sum = 1.0` uzyskano plan sprzedaży z maksymalnym względnym odchyleniem około `0.0808`. Maksymalne odchylenie względne `R: 0.1550`.
+
+|  Punkt | Sprzedaż | Odchylenie |
+| --- | --- | --- |
+|  1   |  277   |  +37   |
+|  2   |  385   |  +0    |
+|  3   |  140   |  +2    |
+|  4   |  224   |  +0    |
+|  5   |  122   |  -22   |
+|  6   |  435   |  -25   |
+|  7   |  175   |  -23   |
+|  8   |  231   |  +31   |

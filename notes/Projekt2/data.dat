@@ -1,0 +1,45 @@
+
+# Zbiory
+set PRODUCTS := P1 P2;
+set FACTORIES := W1 W2;
+set WAREHOUSES := M1 M2 M3;
+set CUSTOMERS := S1 S2 S3 S4;
+
+# Maksymalna produkcja zakładów
+param PRODUCTION: P1  P2 :=
+    W1            41  105
+    W2            34  116;
+
+# Zapotrzebowanie odbiorców
+param DEMAND: P1  P2 :=
+    S1        18  38
+    S2        12  46
+    S3        15  53
+    S4        16  51;
+
+# Koszty transportu zakład -> magazyn (identyczne dla obu produktów)
+param COST_FACTORY_WAREHOUSE: M1  M2  M3 :=
+    W1                         5   2   4
+    W2                         7   4   5;
+
+# Koszty transportu magazyn -> odbiorca (identyczne dla obu produktów)
+param COST_WAREHOUSE_CUSTOMER: S1  S2  S3  S4 :=
+    M1                         15  3   3   4
+    M2                         4   10  5   5
+    M3                         5   5   5   16;
+
+# Możliwe pojemności magazynów
+param Q_M1_1 := 94;
+param Q_M1_2 := 109;
+param Q_M2_0 := 0;
+param Q_M2_1 := 88;
+param Q_M2_2 := 109;
+param Q_M3_MODULE := 14;
+
+# Koszty operacyjne magazynów (tys. zł)
+param K_M1_1 := 348;
+param K_M1_2 := 440;
+param K_M2_0 := 0;
+param K_M2_1 := 324;
+param K_M2_2 := 512;
+param K_M3_MODULE := 18;
